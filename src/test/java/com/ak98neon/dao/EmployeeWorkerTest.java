@@ -1,5 +1,6 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.database.EmployeeWorker;
 import com.ak98neon.model.Employee;
 import org.junit.Before;
 import org.junit.Test;

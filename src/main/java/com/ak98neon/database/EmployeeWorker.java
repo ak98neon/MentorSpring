@@ -1,4 +1,4 @@
-package com.ak98neon.dao;
+package com.ak98neon.database;
 
 import com.ak98neon.model.Employee;
 import com.ak98neon.util.Queries;

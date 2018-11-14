@@ -1,6 +1,7 @@
 package com.ak98neon.controller.dep_servlets;
 
-import com.ak98neon.dao.DepartmentWorker;
+import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.dao.IDepartmentWorker;
 import com.ak98neon.model.Department;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,10 +14,12 @@ import java.util.List;
 @WebServlet(name = "ListDepartmentServlet", urlPatterns = "/listDepartment")
 @Slf4j
 public class ListDepartmentServlet extends HttpServlet {
+    private IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         resp.setCharacterEncoding("utf-8");
-        List<Department> departmentList = DepartmentWorker.selectAllDepartments();
+        List<Department> departmentList = departmentWorker.selectAllDepartments();
         req.setAttribute("departments", departmentList);
 
         try {

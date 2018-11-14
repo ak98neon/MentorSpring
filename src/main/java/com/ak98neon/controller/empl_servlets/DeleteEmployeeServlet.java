@@ -1,6 +1,6 @@
 package com.ak98neon.controller.empl_servlets;
 
-import com.ak98neon.dao.EmployeeWorker;
+import com.ak98neon.database.EmployeeWorker;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.annotation.WebServlet;

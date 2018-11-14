@@ -1,5 +1,6 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.database.DBWorker;
 import org.junit.Test;
 
 import java.sql.Connection;

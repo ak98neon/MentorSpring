@@ -1,4 +1,4 @@
-package com.ak98neon.dao;
+package com.ak98neon.database;
 
 import lombok.extern.slf4j.Slf4j;
 
