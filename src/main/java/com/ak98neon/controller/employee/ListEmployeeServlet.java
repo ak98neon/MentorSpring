@@ -1,6 +1,7 @@
-package com.ak98neon.controller.empl_servlets;
+package com.ak98neon.controller.employee;
 
-import com.ak98neon.database.EmployeeWorker;
+import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.dao.IEmployeeWorker;
 import com.ak98neon.model.Employee;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,9 +28,10 @@ public class ListEmployeeServlet extends HttpServlet {
 
     private void processListEmployee(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IEmployeeWorker employeeWorker = AnnotationConfig.getAnnotationConfig().getBean(IEmployeeWorker.class);
             req.setCharacterEncoding("UTF-8");
             String depId = req.getParameter("id");
-            List<Employee> employees = EmployeeWorker.selectAllEmployeesByDepartment(Long.parseLong(depId));
+            List<Employee> employees = employeeWorker.selectAllEmployeesByDepartment(Long.parseLong(depId));
             req.setAttribute("employees", employees);
             req.setAttribute("depId", depId);
             req.getRequestDispatcher("/jsp/listEmployee.jsp").forward(req, resp);

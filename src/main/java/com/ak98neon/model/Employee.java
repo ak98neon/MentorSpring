@@ -3,12 +3,14 @@ package com.ak98neon.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public class Employee {
     public static final String TABLE_NAME = "EMPLOYEE";
     public static final String ID_COLUMN = "ID";

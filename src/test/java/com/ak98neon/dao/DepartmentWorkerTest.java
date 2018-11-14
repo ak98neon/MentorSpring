@@ -1,21 +1,21 @@
 package com.ak98neon.dao;
 
-import com.ak98neon.database.DepartmentWorker;
+import com.ak98neon.configure.AnnotationConfig;
 import com.ak98neon.model.Department;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(JUnit4.class)
 public class DepartmentWorkerTest {
-    @Autowired
-    private DepartmentWorker departmentWorker;
+    private IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
     private static String nameTestDep = "test";
-    private static long id = 1;
 
     @Before
     public void initAndInsertDepartment() {
@@ -43,6 +43,7 @@ public class DepartmentWorkerTest {
 
     @Test
     public void update_Name_True() {
+        long id = 1;
         assertTrue(departmentWorker.updateDepartment(id, "newTEST"));
     }
 

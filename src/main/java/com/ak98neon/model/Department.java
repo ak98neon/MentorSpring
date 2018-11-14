@@ -3,6 +3,7 @@ package com.ak98neon.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Artem Kudria
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public class Department {
     public static final String TABLE_NAME = "DEPARTMENT";
     public static final String ID_COLUMN = "ID";

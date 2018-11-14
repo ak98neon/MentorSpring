@@ -1,4 +1,4 @@
-package com.ak98neon.controller.dep_servlets;
+package com.ak98neon.controller.department;
 
 import com.ak98neon.configure.AnnotationConfig;
 import com.ak98neon.dao.IDepartmentWorker;
@@ -15,11 +15,10 @@ import java.io.IOException;
 @WebServlet(name = "UpdateDepartmentServlet", urlPatterns = "/updateDepartment")
 @Slf4j
 public class UpdateDepartmentServlet extends HttpServlet {
-    private IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
             req.setCharacterEncoding("UTF-8");
             String id = req.getParameter("id");
             Department department = departmentWorker.selectById(Long.parseLong(id));
@@ -35,6 +34,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
             req.setCharacterEncoding("UTF-8");
             String name = req.getParameter("name");
             String id = req.getParameter("id");

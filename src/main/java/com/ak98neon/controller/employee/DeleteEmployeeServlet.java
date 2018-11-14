@@ -1,6 +1,7 @@
-package com.ak98neon.controller.empl_servlets;
+package com.ak98neon.controller.employee;
 
-import com.ak98neon.database.EmployeeWorker;
+import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.dao.IEmployeeWorker;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,10 @@ public class DeleteEmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IEmployeeWorker employeeWorker = AnnotationConfig.getAnnotationConfig().getBean(IEmployeeWorker.class);
             final String parameterDepId = "id";
             String id = req.getParameter(parameterDepId);
-            EmployeeWorker.deleteEmployee(Long.parseLong(id));
+            employeeWorker.deleteEmployee(Long.parseLong(id));
             String depId = req.getParameter("depId");
             resp.sendRedirect("/listEmployee?" + parameterDepId + "=" + depId);
         } catch (Exception e) {

@@ -1,6 +1,7 @@
-package com.ak98neon.controller.empl_servlets;
+package com.ak98neon.controller.employee;
 
-import com.ak98neon.database.EmployeeWorker;
+import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.dao.IEmployeeWorker;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ public class AddEmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IEmployeeWorker employeeWorker = AnnotationConfig.getAnnotationConfig().getBean(IEmployeeWorker.class);
             req.setCharacterEncoding("UTF-8");
             String depId = req.getParameter("depId");
             String firstName = req.getParameter("first_name");
@@ -24,7 +26,7 @@ public class AddEmployeeServlet extends HttpServlet {
             int intAge = Integer.parseInt(age);
             String mail = req.getParameter("mail");
             long longDepId = Long.parseLong(depId);
-            EmployeeWorker.insertEmployee(firstName, lastName, intAge, mail, longDepId);
+            employeeWorker.insertEmployee(firstName, lastName, intAge, mail, longDepId);
             resp.sendRedirect("/listEmployee?id=" + depId);
         } catch (NumberFormatException | IOException e) {
             log.info("post insert employee, error: {}", e);

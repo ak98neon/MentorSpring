@@ -1,4 +1,4 @@
-package com.ak98neon.controller.dep_servlets;
+package com.ak98neon.controller.department;
 
 import com.ak98neon.configure.AnnotationConfig;
 import com.ak98neon.dao.IDepartmentWorker;
@@ -17,16 +17,15 @@ import java.io.IOException;
   Servlet adding new department in db
  */
 public class AddDepartmentServlet extends HttpServlet {
-    private IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
             req.setCharacterEncoding("UTF-8");
             String name = req.getParameter("name");
             departmentWorker.insertDepartment(name);
             resp.sendRedirect("/listDepartment");
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.info("[POST]add department error: {}", e);
         }
     }

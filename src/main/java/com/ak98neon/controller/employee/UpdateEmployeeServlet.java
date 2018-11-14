@@ -1,6 +1,7 @@
-package com.ak98neon.controller.empl_servlets;
+package com.ak98neon.controller.employee;
 
-import com.ak98neon.database.EmployeeWorker;
+import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.dao.IEmployeeWorker;
 import com.ak98neon.model.Employee;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,9 +18,10 @@ public class UpdateEmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            IEmployeeWorker employeeWorker = AnnotationConfig.getAnnotationConfig().getBean(IEmployeeWorker.class);
             req.setCharacterEncoding("UTF-8");
             long id = Long.parseLong(req.getParameter("id"));
-            Employee employee = EmployeeWorker.selectByIdEmployee(id);
+            Employee employee = employeeWorker.selectByIdEmployee(id);
             if (employee != null) {
                 req.setAttribute("firstName", employee.getFirstName());
                 req.setAttribute("lastName", employee.getLastName());
@@ -38,6 +40,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String departmentID = "";
         try {
+            IEmployeeWorker employeeWorker = AnnotationConfig.getAnnotationConfig().getBean(IEmployeeWorker.class);
             req.setCharacterEncoding("UTF-8");
             long id = Long.parseLong(req.getParameter("id"));
             String firstName = req.getParameter("first_name");
@@ -46,7 +49,7 @@ public class UpdateEmployeeServlet extends HttpServlet {
             int intAge = Integer.parseInt(age);
             String mail = req.getParameter("mail");
             departmentID = req.getParameter("department_id");
-            EmployeeWorker.updateEmployee(id, firstName, lastName, intAge, mail);
+            employeeWorker.updateEmployee(id, firstName, lastName, intAge, mail);
             resp.sendRedirect("/listEmployee?id=" + departmentID);
         } catch (IOException | NumberFormatException e) {
             log.info("Update employee(GET), error {}", e);
