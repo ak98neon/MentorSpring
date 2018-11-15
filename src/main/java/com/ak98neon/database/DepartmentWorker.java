@@ -18,7 +18,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Component
-@Scope("singleton")
 public final class DepartmentWorker implements IDepartmentWorker {
     @Autowired
     private JdbcTemplate jdbcTemplate;
