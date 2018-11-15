@@ -4,13 +4,6 @@
 <%--@elvariable id="lastName" type="java"--%>
 <%--@elvariable id="age" type="java"--%>
 <%--@elvariable id="mail" type="java"--%>
-<%--
-  Created by IntelliJ IDEA.
-  User: artemkudrya
-  Date: 11/6/18
-  Time: 22:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <html lang="ru">
 <head>
