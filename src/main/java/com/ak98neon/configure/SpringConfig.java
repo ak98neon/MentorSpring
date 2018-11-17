@@ -1,5 +1,7 @@
 package com.ak98neon.configure;
 
+import com.ak98neon.dao.IDepartmentWorker;
+import com.ak98neon.dao.IEmployeeWorker;
 import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.database.EmployeeWorker;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 import javax.sql.DataSource;
 
@@ -15,6 +20,15 @@ import javax.sql.DataSource;
 @EnableWebMvc
 @ComponentScan("com.ak98neon")
 public class SpringConfig {
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -32,12 +46,12 @@ public class SpringConfig {
     }
 
     @Bean
-    public DepartmentWorker departmentWorker() {
-        return new DepartmentWorker();
+    public IDepartmentWorker departmentWorker() {
+        return new DepartmentWorker(jdbcOperations());
     }
 
     @Bean
-    EmployeeWorker employeeWorker() {
-        return new EmployeeWorker();
+    public IEmployeeWorker employeeWorker() {
+        return new EmployeeWorker(jdbcOperations());
     }
 }

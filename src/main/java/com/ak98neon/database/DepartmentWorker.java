@@ -3,21 +3,20 @@ package com.ak98neon.database;
 import com.ak98neon.dao.IDepartmentWorker;
 import com.ak98neon.model.Department;
 import com.ak98neon.util.Queries;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Slf4j
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@Component
 public final class DepartmentWorker implements IDepartmentWorker {
     @Autowired
     private JdbcTemplate jdbcTemplate;
