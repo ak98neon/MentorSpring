@@ -1,11 +1,11 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.model.Department;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -14,8 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class DepartmentWorkerTest {
-    @Autowired
-    private IDepartmentWorker departmentWorker;
+    private IDepartmentWorker departmentWorker = new DepartmentWorker();
     private static String nameTestDep = "test";
 
     @Before

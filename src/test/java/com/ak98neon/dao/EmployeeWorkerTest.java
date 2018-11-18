@@ -1,11 +1,11 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.database.EmployeeWorker;
 import com.ak98neon.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -14,11 +14,9 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class EmployeeWorkerTest {
-    @Autowired
-    private IEmployeeWorker employeeWorker;
+    private IEmployeeWorker employeeWorker = new EmployeeWorker();
     private static Long id = 1L;
     private static Employee employee = new Employee(id, "test", "test", 20, "test@mail.ru", id);
-
 
     @Before
     public void initAndInsertEmployee() {

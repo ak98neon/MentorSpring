@@ -3,23 +3,27 @@ package com.ak98neon.database;
 import com.ak98neon.dao.IDepartmentWorker;
 import com.ak98neon.model.Department;
 import com.ak98neon.util.Queries;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Slf4j
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@Component
 public final class DepartmentWorker implements IDepartmentWorker {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public DepartmentWorker(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public synchronized boolean createTable() {
         jdbcTemplate.execute(Queries.CREATE_TABLE);
@@ -45,12 +49,20 @@ public final class DepartmentWorker implements IDepartmentWorker {
         return true;
     }
 
+    /**
+     * Select Department by id
+     *
+     * @param id id department
+     * @return Department object
+     */
     public synchronized Department selectById(final long id) {
-        return (Department) jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, new DepartmentRowMapper());
+        DepartmentRowMapper departmentRowMapper = new DepartmentRowMapper();
+        return (Department) jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, departmentRowMapper);
     }
 
     public synchronized List<Department> selectAllDepartments() {
-        return (List<Department>) jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
+        BeanPropertyRowMapper beanPropertyRowMapper = new BeanPropertyRowMapper(Department.class);
+        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, beanPropertyRowMapper);
     }
 
     public synchronized boolean dropTable() {

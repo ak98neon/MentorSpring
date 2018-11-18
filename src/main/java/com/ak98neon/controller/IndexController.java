@@ -4,21 +4,23 @@ import com.ak98neon.dao.IDepartmentWorker;
 import com.ak98neon.dao.IEmployeeWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
-    @Autowired
     private IDepartmentWorker departmentWorker;
-    @Autowired
     private IEmployeeWorker employeeWorker;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @Autowired
+    private IndexController(IDepartmentWorker departmentWorker, IEmployeeWorker employeeWorker) {
+        this.departmentWorker = departmentWorker;
+        this.employeeWorker = employeeWorker;
+    }
+
+    @GetMapping(value = "/")
     public String index() {
-//        departmentWorker.createTable();
-//        employeeWorker.createTable();
-//        employeeWorker.insertEmployee("Artem", "Kudria", 20, "mail@mail.com", 161);
+        departmentWorker.createTable();
+        employeeWorker.createTable();
         return "index";
     }
 }

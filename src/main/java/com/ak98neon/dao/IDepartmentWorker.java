@@ -15,7 +15,7 @@ public interface IDepartmentWorker {
 
     Department selectById(final long id);
 
-    List<Department> selectAllDepartments();
+    List selectAllDepartments();
 
     boolean dropTable();
 }
