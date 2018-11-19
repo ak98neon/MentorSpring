@@ -1,6 +1,7 @@
 package com.ak98neon.database;
 
 import com.ak98neon.dao.IEmployeeWorker;
+import com.ak98neon.database.rowmappers.EmployeeRowMapper;
 import com.ak98neon.model.Employee;
 import com.ak98neon.util.Queries;
 import lombok.Data;
@@ -67,7 +68,7 @@ public final class EmployeeWorker implements IEmployeeWorker {
     }
 
     private synchronized List<Employee> selectAll(final String query, final long idDepartment) {
-        List<Employee> list;
+        List list;
         if (idDepartment > 0) {
             list = jdbcTemplate.query(query, new EmployeeRowMapper(), idDepartment);
         } else {

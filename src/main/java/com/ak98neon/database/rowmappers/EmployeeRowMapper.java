@@ -1,4 +1,4 @@
-package com.ak98neon.database;
+package com.ak98neon.database.rowmappers;
 
 import com.ak98neon.model.Employee;
 import org.springframework.jdbc.core.RowMapper;

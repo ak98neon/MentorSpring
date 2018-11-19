@@ -1,6 +1,7 @@
 package com.ak98neon.database;
 
 import com.ak98neon.dao.IDepartmentWorker;
+import com.ak98neon.database.rowmappers.DepatmentRowMapper;
 import com.ak98neon.model.Department;
 import com.ak98neon.util.Queries;
 import lombok.Data;
@@ -56,13 +57,11 @@ public final class DepartmentWorker implements IDepartmentWorker {
      * @return Department object
      */
     public synchronized Department selectById(final long id) {
-        DepartmentRowMapper departmentRowMapper = new DepartmentRowMapper();
-        return (Department) jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, departmentRowMapper);
+        return jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, new DepatmentRowMapper());
     }
 
     public synchronized List<Department> selectAllDepartments() {
-        BeanPropertyRowMapper beanPropertyRowMapper = new BeanPropertyRowMapper(Department.class);
-        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, beanPropertyRowMapper);
+        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
     }
 
     public synchronized boolean dropTable() {

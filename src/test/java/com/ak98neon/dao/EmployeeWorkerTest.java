@@ -1,21 +1,24 @@
 package com.ak98neon.dao;
 
-import com.ak98neon.database.EmployeeWorker;
 import com.ak98neon.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class EmployeeWorkerTest {
-    private IEmployeeWorker employeeWorker = new EmployeeWorker();
-    private static Long id = 1L;
+    @Mock
+    private IEmployeeWorker employeeWorker;
+    @Value("1L")
+    private static Long id;
     private static Employee employee = new Employee(id, "test", "test", 20, "test@mail.ru", id);
 
     @Before

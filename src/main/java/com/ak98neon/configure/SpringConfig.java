@@ -45,12 +45,12 @@ public class SpringConfig {
         return new JdbcTemplate(dataSource());
     }
 
-    @Bean
+    @Bean(name = "departmentWorker")
     public IDepartmentWorker departmentWorker() {
         return new DepartmentWorker(jdbcOperations());
     }
 
-    @Bean
+    @Bean(name = "employeeWorker")
     public IEmployeeWorker employeeWorker() {
         return new EmployeeWorker(jdbcOperations());
     }

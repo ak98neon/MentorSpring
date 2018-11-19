@@ -16,9 +16,9 @@ import java.util.List;
 public class EmployeeController {
     private IEmployeeWorker employeeWorker;
     @Value("redirect:/listEmployee?id=")
-    private static String redirectListEmployee;
+    private String redirectListEmployee;
     @Value("depId")
-    private static String strDepId;
+    private String strDepId;
 
     @Autowired
     private EmployeeController(IEmployeeWorker employeeWorker) {
@@ -29,8 +29,8 @@ public class EmployeeController {
     public String listEmployee(HttpServletRequest request, ModelMap modelMap) {
         String depId = request.getParameter("id");
         List<Employee> employees = employeeWorker.selectAllEmployeesByDepartment(Long.parseLong(depId));
-        request.setAttribute("employees", employees);
-        request.setAttribute(strDepId, depId);
+        modelMap.addAttribute("employees", employees);
+        modelMap.addAttribute(strDepId, depId);
         return "listEmployee";
     }
 
