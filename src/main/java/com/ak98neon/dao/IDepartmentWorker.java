@@ -13,6 +13,12 @@ public interface IDepartmentWorker {
 
     boolean deleteDepartment(final long id);
 
+    /**
+     * Select Department by id
+     *
+     * @param id id department
+     * @return Department object
+     */
     Department selectById(final long id);
 
     List selectAllDepartments();

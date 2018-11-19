@@ -50,18 +50,13 @@ public final class DepartmentWorker implements IDepartmentWorker {
         return true;
     }
 
-    /**
-     * Select Department by id
-     *
-     * @param id id department
-     * @return Department object
-     */
     public synchronized Department selectById(final long id) {
         return jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, new DepatmentRowMapper());
     }
 
     public synchronized List<Department> selectAllDepartments() {
         return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
+//        return getJdbcTemplate().query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
     }
 
     public synchronized boolean dropTable() {
