@@ -10,13 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @Data
 @NoArgsConstructor
-@Component
+@Service
 public final class DepartmentWorker implements IDepartmentWorker {
     private JdbcTemplate jdbcTemplate;
 

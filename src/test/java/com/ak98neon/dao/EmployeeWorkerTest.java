@@ -7,9 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
@@ -17,16 +17,17 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {SpringConfig.class})
 public class EmployeeWorkerTest {
-    @Value("1L")
-    private static Long id;
-    private static Employee employee = new Employee(id, "test", "test", 20, "test@mail.ru", id);
+    private static Employee employee;
     @Autowired
     private EmployeeWorker employeeWorker;
 
     @Before
     public void initAndInsertEmployee() {
+        Long id = 1L;
+        employee = new Employee(id, "test", "test", 20, "test@mail.ru", id);
         employeeWorker.createTable();
         employeeWorker.insertEmployee(employee.getFirstName(), employee.getLastName(), employee.getAge(),
                 employee.getMail(), employee.getDepartmentId());
