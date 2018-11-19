@@ -1,7 +1,5 @@
 package com.ak98neon.configure;
 
-import com.ak98neon.dao.IDepartmentWorker;
-import com.ak98neon.dao.IEmployeeWorker;
 import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.database.EmployeeWorker;
 import org.springframework.context.annotation.Bean;
@@ -45,13 +43,13 @@ public class SpringConfig {
         return new JdbcTemplate(dataSource());
     }
 
-    @Bean(name = "departmentWorker")
-    public IDepartmentWorker departmentWorker() {
+    @Bean
+    public DepartmentWorker departmentWorker() {
         return new DepartmentWorker(jdbcOperations());
     }
 
-    @Bean(name = "employeeWorker")
-    public IEmployeeWorker employeeWorker() {
+    @Bean
+    public EmployeeWorker employeeWorker() {
         return new EmployeeWorker(jdbcOperations());
     }
 }

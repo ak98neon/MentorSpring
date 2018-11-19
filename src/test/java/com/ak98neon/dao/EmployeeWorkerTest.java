@@ -1,23 +1,29 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.configure.SpringConfig;
+import com.ak98neon.database.EmployeeWorker;
 import com.ak98neon.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class)
 public class EmployeeWorkerTest {
-    private IEmployeeWorker employeeWorker;
     @Value("1L")
     private static Long id;
     private static Employee employee = new Employee(id, "test", "test", 20, "test@mail.ru", id);
+    @Autowired
+    private EmployeeWorker employeeWorker;
 
     @Before
     public void initAndInsertEmployee() {

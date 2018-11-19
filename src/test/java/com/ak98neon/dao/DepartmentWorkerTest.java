@@ -1,24 +1,28 @@
 package com.ak98neon.dao;
 
+import com.ak98neon.configure.SpringConfig;
+import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.model.Department;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
-@Component
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {SpringConfig.class})
 public class DepartmentWorkerTest {
-    private IDepartmentWorker departmentWorker;
+    @Autowired
+    private DepartmentWorker departmentWorker;
     @Value("test")
-    private static String nameTestDep;
+    private String nameTestDep;
 
     @Before
     public void initAndInsertDepartment() {
