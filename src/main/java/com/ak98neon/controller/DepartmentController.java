@@ -25,7 +25,7 @@ public class DepartmentController {
 
     @GetMapping(value = "/listDepartment")
     public String listEmployee(ModelMap modelMap) {
-        List<Department> listDepartments = departmentWorker.selectAllDepartments();
+        List listDepartments = departmentWorker.selectAllDepartments();
         modelMap.addAttribute("departments", listDepartments);
         return "listDepartment";
     }

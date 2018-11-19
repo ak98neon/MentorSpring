@@ -54,8 +54,7 @@ public final class DepartmentWorker implements IDepartmentWorker {
     }
 
     public synchronized List<Department> selectAllDepartments() {
-//        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
-        return getJdbcTemplate().query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
+        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
     }
 
     public synchronized boolean dropTable() {

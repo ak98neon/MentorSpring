@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +53,7 @@ public final class EmployeeWorker implements IEmployeeWorker {
     }
 
     public synchronized Employee selectByIdEmployee(final long id) {
-        Employee employee = (Employee) jdbcTemplate.queryForObject(Queries.SELECT_EMPLOYEE, new Object[]{id}, new EmployeeRowMapper());
+        Employee employee = jdbcTemplate.queryForObject(Queries.SELECT_EMPLOYEE, new Object[]{id}, new EmployeeRowMapper());
         log.info("employee is select for id");
         return employee;
     }
@@ -68,11 +67,11 @@ public final class EmployeeWorker implements IEmployeeWorker {
     }
 
     private synchronized List<Employee> selectAll(final String query, final long idDepartment) {
-        List list;
+        List<Employee> list;
         if (idDepartment > 0) {
             list = jdbcTemplate.query(query, new EmployeeRowMapper(), idDepartment);
         } else {
-            list = jdbcTemplate.query(query, new BeanPropertyRowMapper(Employee.class));
+            list = jdbcTemplate.query(query, new EmployeeRowMapper());
         }
         log.info("Select all employee");
         return list;

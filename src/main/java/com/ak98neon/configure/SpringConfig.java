@@ -33,7 +33,7 @@ public class SpringConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test?useUnicode=true&characterEncoding=utf8");
+        dataSource.setUrl("jdbc:h2:~/test");
         dataSource.setUsername("sa");
         dataSource.setPassword("");
 

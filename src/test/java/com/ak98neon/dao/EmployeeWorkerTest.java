@@ -4,8 +4,7 @@ import com.ak98neon.model.Employee;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
@@ -13,9 +12,8 @@ import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnit4.class)
 public class EmployeeWorkerTest {
-    @Mock
     private IEmployeeWorker employeeWorker;
     @Value("1L")
     private static Long id;

@@ -4,8 +4,7 @@ import com.ak98neon.model.Department;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +13,9 @@ import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JUnit4.class)
 @Component
 public class DepartmentWorkerTest {
-    @Mock
     private IDepartmentWorker departmentWorker;
     @Value("test")
     private static String nameTestDep;
