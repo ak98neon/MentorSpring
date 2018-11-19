@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -55,8 +54,8 @@ public final class DepartmentWorker implements IDepartmentWorker {
     }
 
     public synchronized List<Department> selectAllDepartments() {
-        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
-//        return getJdbcTemplate().query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
+//        return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new BeanPropertyRowMapper(Department.class));
+        return getJdbcTemplate().query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
     }
 
     public synchronized boolean dropTable() {

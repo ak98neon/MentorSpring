@@ -16,7 +16,7 @@ import java.util.List;
 public class DepartmentController {
     private IDepartmentWorker departmentWorker;
     @Value("redirect:/listDepartment")
-    private static String redirectListDepartment;
+    private String redirectListDepartment;
 
     @Autowired
     private DepartmentController(IDepartmentWorker departmentWorker) {
