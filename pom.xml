@@ -96,6 +96,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <warName>department</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <plugin>
