@@ -3,6 +3,7 @@ package com.ak98neon.dao;
 import com.ak98neon.configure.SpringConfig;
 import com.ak98neon.database.EmployeeWorker;
 import com.ak98neon.model.Employee;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,31 +49,30 @@ public class EmployeeWorkerTest {
     @Test
     public void delete_RequestToDeleteEmployee_True() {
         List<Employee> list = employeeWorker.selectAllEmployees();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertTrue(employeeWorker.deleteEmployee(list.get(0).getId()));
     }
 
     @Test
     public void update_NameAndLNameAndAgeAndMail_True() {
         List<Employee> list = employeeWorker.selectAllEmployees();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertTrue(employeeWorker.updateEmployee(list.get(0).getId(), employee.getFirstName(), employee.getLastName(), employee.getAge(), employee.getMail()));
     }
 
     @Test
     public void select_EpmployeeName_ObjectEmployee() {
         List<Employee> list = employeeWorker.selectAllEmployees();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         Employee s = employeeWorker.selectByIdEmployee(list.get(0).getId());
-        assert s != null;
+        Assert.assertNotNull(s);
         assertNotNull(s.getFirstName());
     }
 
     @Test
     public void select_RequestToSelectAll_True() {
         List<Employee> list = employeeWorker.selectAllEmployees();
-        assert list != null;
-        assertTrue(!list.isEmpty());
+        Assert.assertFalse(list.isEmpty());
     }
 
     @Test

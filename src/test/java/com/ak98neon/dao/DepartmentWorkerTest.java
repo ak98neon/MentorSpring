@@ -3,6 +3,7 @@ package com.ak98neon.dao;
 import com.ak98neon.configure.SpringConfig;
 import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.model.Department;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class DepartmentWorkerTest {
     @Test
     public void delete_RequestToDeleteDepartment_True() {
         List<Department> list = departmentWorker.selectAllDepartments();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertTrue(departmentWorker.deleteDepartment(list.get(0).getId()));
     }
 
@@ -59,7 +60,7 @@ public class DepartmentWorkerTest {
     @Test
     public void select_DepartmentName_ObjectDepartment() {
         List<Department> list = departmentWorker.selectAllDepartments();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertNotNull(list.get(0).getId());
     }
 
