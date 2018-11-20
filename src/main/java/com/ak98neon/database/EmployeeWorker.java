@@ -70,10 +70,11 @@ public final class EmployeeWorker implements IEmployeeWorker {
         List<Employee> list;
         if (idDepartment > 0) {
             list = jdbcTemplate.query(query, new EmployeeRowMapper(), idDepartment);
+            log.info("Select all employee");
         } else {
             list = jdbcTemplate.query(query, new EmployeeRowMapper());
+            log.info("Select all employee by department id");
         }
-        log.info("Select all employee");
         return list;
     }
 

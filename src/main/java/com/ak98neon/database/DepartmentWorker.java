@@ -33,27 +33,29 @@ public final class DepartmentWorker implements IDepartmentWorker {
 
     public synchronized boolean insertDepartment(final String name) {
         jdbcTemplate.update(Queries.INSERT_DEPARTMENT, name);
-        log.info("Insert is department");
+        log.info("Insert is department to database for name");
         return true;
     }
 
     public synchronized boolean updateDepartment(final Long id, final String newName) {
         jdbcTemplate.update(Queries.UPDATE_DEPARTMENT, newName, id);
-        log.info("Update Department");
+        log.info("Update Department into database for id, with new name");
         return true;
     }
 
     public synchronized boolean deleteDepartment(final long id) {
         jdbcTemplate.update(Queries.DELETE_DEPARTMENT, id);
-        log.info("Delete department");
+        log.info("Delete department for id");
         return true;
     }
 
     public synchronized Department selectById(final long id) {
+        log.info("Select department for id");
         return jdbcTemplate.queryForObject(Queries.SELECT_DEPARTMENT, new Object[]{id}, new DepatmentRowMapper());
     }
 
     public synchronized List<Department> selectAllDepartments() {
+        log.info("Select all departments");
         return jdbcTemplate.query(Queries.SELECT_ALL_DEPARTMENT, new DepatmentRowMapper());
     }
 
