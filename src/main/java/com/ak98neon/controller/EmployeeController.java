@@ -35,7 +35,7 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "/addEmployee")
-    public String addEmployee(HttpServletRequest request, ModelMap modelMap) {
+    public String addEmployee(HttpServletRequest request) {
         String depId = request.getParameter(strDepId);
         String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");

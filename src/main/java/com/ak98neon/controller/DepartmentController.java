@@ -37,7 +37,7 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/addDepartment")
-    public String addEmployeeGet(ModelMap modelMap) {
+    public String addEmployeeGet() {
         return "addDepartment";
     }
 
