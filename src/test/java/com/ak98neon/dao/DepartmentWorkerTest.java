@@ -1,21 +1,31 @@
 package com.ak98neon.dao;
 
-import com.ak98neon.configure.AnnotationConfig;
+import com.ak98neon.configure.SpringConfig;
+import com.ak98neon.database.DepartmentWorker;
 import com.ak98neon.model.Department;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration(classes = {SpringConfig.class})
 public class DepartmentWorkerTest {
-    private IDepartmentWorker departmentWorker = AnnotationConfig.getAnnotationConfig().getBean(IDepartmentWorker.class);
-    private static String nameTestDep = "test";
+    @Autowired
+    private DepartmentWorker departmentWorker;
+    @Value("test")
+    private String nameTestDep;
 
     @Before
     public void initAndInsertDepartment() {
@@ -37,7 +47,7 @@ public class DepartmentWorkerTest {
     @Test
     public void delete_RequestToDeleteDepartment_True() {
         List<Department> list = departmentWorker.selectAllDepartments();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertTrue(departmentWorker.deleteDepartment(list.get(0).getId()));
     }
 
@@ -50,7 +60,7 @@ public class DepartmentWorkerTest {
     @Test
     public void select_DepartmentName_ObjectDepartment() {
         List<Department> list = departmentWorker.selectAllDepartments();
-        assert list != null;
+        Assert.assertFalse(list.isEmpty());
         assertNotNull(list.get(0).getId());
     }
 

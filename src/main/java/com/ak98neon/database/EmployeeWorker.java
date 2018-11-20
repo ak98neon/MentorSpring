@@ -1,16 +1,15 @@
 package com.ak98neon.database;
 
 import com.ak98neon.dao.IEmployeeWorker;
+import com.ak98neon.database.rowmappers.EmployeeRowMapper;
 import com.ak98neon.model.Employee;
 import com.ak98neon.util.Queries;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
@@ -18,11 +17,14 @@ import java.util.List;
 @Slf4j
 @Data
 @NoArgsConstructor
-@Component
-@Scope("singleton")
+@Service
 public final class EmployeeWorker implements IEmployeeWorker {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public EmployeeWorker(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public synchronized boolean createTable() {
         jdbcTemplate.execute(Queries.CREATE_TABLE_EMPLOYEE);
@@ -51,7 +53,7 @@ public final class EmployeeWorker implements IEmployeeWorker {
     }
 
     public synchronized Employee selectByIdEmployee(final long id) {
-        Employee employee = (Employee) jdbcTemplate.queryForObject(Queries.SELECT_EMPLOYEE, new Object[]{id}, new EmployeeRowMapper());
+        Employee employee = jdbcTemplate.queryForObject(Queries.SELECT_EMPLOYEE, new Object[]{id}, new EmployeeRowMapper());
         log.info("employee is select for id");
         return employee;
     }
@@ -65,13 +67,14 @@ public final class EmployeeWorker implements IEmployeeWorker {
     }
 
     private synchronized List<Employee> selectAll(final String query, final long idDepartment) {
-        List list;
+        List<Employee> list;
         if (idDepartment > 0) {
             list = jdbcTemplate.query(query, new EmployeeRowMapper(), idDepartment);
+            log.info("Select all employee");
         } else {
-            list = jdbcTemplate.query(query, new BeanPropertyRowMapper(Employee.class));
+            list = jdbcTemplate.query(query, new EmployeeRowMapper());
+            log.info("Select all employee by department id");
         }
-        log.info("Select all employee");
         return list;
     }
 
